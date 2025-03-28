@@ -11,7 +11,7 @@ import SwiftUI
 struct Humor_TCAApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HumorView()
         }
     }
 }
