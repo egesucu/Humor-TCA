@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 struct Meme: Identifiable, Decodable {
-    let id: String
+    let id: Int
     let urlString: String
     let type: String
     
@@ -19,7 +20,8 @@ struct Meme: Identifiable, Decodable {
     }
     
     var url: URL? {
-        return URL(string: urlString)
+        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return nil}
+        return url
     }
     
 }

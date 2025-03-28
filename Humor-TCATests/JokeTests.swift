@@ -14,14 +14,14 @@ struct JokeTests {
     func decodingValidJokeJSON() throws {
         let json = """
         {
-            "id": "abc123",
+            "id": 123,
             "joke": "Why did the chicken join a band? Because it had the drumsticks!"
         }
         """.data(using: .utf8)!
 
         let decoded = try JSONDecoder().decode(Joke.self, from: json)
 
-        #expect(decoded.id == "abc123")
+        #expect(decoded.id == 123)
         #expect(decoded.joke == "Why did the chicken join a band? Because it had the drumsticks!")
     }
 

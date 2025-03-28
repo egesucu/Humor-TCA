@@ -7,41 +7,68 @@
 
 import Foundation
 
-class DefaultHumorRepository: HumorRepository {
-    private lazy var apiKey: String? = {
-        guard let fileURL = Bundle.main.url(forResource: "api_key", withExtension: "txt"),
-              let key = try? String(contentsOf: fileURL, encoding: .utf8).trimmingCharacters(in: .whitespacesAndNewlines),
-              !key.isEmpty else {
-            print("⚠️ Failed to load API key from api_key.txt")
-            return nil
-        }
-        return key
-    }()
+final class DefaultHumorRepository: HumorRepository {
+    private let apiKey: String?
+    private let baseURL: String
     
-    private let baseURL = "https://api.humorapi.com"
+    init() {
+        self.apiKey = Self.loadAPIKey()
+        self.baseURL = "https://api.humorapi.com"
+    }
+    
+    /// This is a test case init, which uses apiKey to intentionally make apiKey nil
+    init(
+        fakeApiKey: String = "",
+        fakeBaseURL: String = ""
+    ) {
+        if fakeApiKey.isNotEmpty {
+            self.apiKey = nil
+            self.baseURL = "https://api.humorapi.com"
+        } else if fakeBaseURL.isNotEmpty {
+            self.baseURL = ""
+            self.apiKey = Self.loadAPIKey()
+        } else {
+            self.apiKey = Self.loadAPIKey()
+            self.baseURL = "https://api.humorapi.com"
+        }
+    }
+    
+    private static func loadAPIKey() -> String? {
+            guard let fileURL = Bundle.main.url(forResource: "api_key", withExtension: "txt"),
+                  let key = try? String(contentsOf: fileURL, encoding: .utf8).trimmingCharacters(in: .whitespacesAndNewlines),
+                  !key.isEmpty else {
+                return nil
+            }
+            return key
+        }
+    
+   
     
     func searchJokes(keywords: String, number: Int) async throws(APIErrors) -> [Joke] {
-        let searchQuery = keywords.replacingOccurrences(of: " ", with: ",")
-        guard searchQuery.isNotEmpty else {
+        guard keywords.trimmingCharacters(in: .whitespacesAndNewlines).isNotEmpty else {
             print("Search query is empty, skipping the search")
             throw .emptySearchQuery
         }
+        let searchQuery = keywords.replacingOccurrences(of: " ", with: ",")
+        
         guard let apiKey,
               let url = URL(string: "\(baseURL)/jokes/search?api-key=\(apiKey)&number=\(number)&keywords=\(searchQuery)") else {
             throw .invalidURL
         }
+        
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession.shared.data(from: url)
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                throw APIErrors.invalidResponse
+            do {
+                let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
+                return searchResponse.jokes
+            } catch {
+                print("Decoding has failed: \(error)")
+                throw APIErrors.decodingFailed
             }
             
-            let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
-            return searchResponse.jokes
         } catch {
-            print("Decoding has failed: \(error)")
-            throw .decodingFailed
+            throw .invalidResponse
         }
     }
     
@@ -52,14 +79,16 @@ class DefaultHumorRepository: HumorRepository {
         }
         
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                throw APIErrors.invalidResponse
+            let (data, _) = try await URLSession.shared.data(from: url)
+            do {
+                return try JSONDecoder().decode(Joke.self, from: data)
+            } catch {
+                print("Decoding has failed: \(error)")
+                throw APIErrors.decodingFailed
             }
-            return try JSONDecoder().decode(Joke.self, from: data)
+            
         } catch {
-            print("Decoding has failed: \(error)")
-            throw .decodingFailed
+            throw .invalidResponse
         }
     }
     
@@ -68,34 +97,17 @@ class DefaultHumorRepository: HumorRepository {
               let url = URL(string: "\(baseURL)/memes/random?api-key=\(apiKey)") else {
             throw .invalidURL
         }
-        
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                throw APIErrors.invalidResponse
+            let (data, _) = try await URLSession.shared.data(from: url)
+            do {
+                return try JSONDecoder().decode(Meme.self, from: data)
+            } catch {
+                print("Decoding has failed: \(error)")
+                throw APIErrors.decodingFailed
             }
-            return try JSONDecoder().decode(Meme.self, from: data)
+            
         } catch {
-            print("Decoding has failed: \(error)")
-            throw .decodingFailed
+            throw .invalidResponse
         }
     }
-}
-
-enum APIErrors: String, Error {
-    case invalidURL = "The given URL is invalid"
-    case invalidResponse = "The response is not valid."
-    case decodingFailed = "Decoding has failed."
-    case emptySearchQuery = "The search query is empty."
-}
-
-extension String {
-    var isNotEmpty: Bool {
-        !isEmpty
-    }
-}
-
-// The API returns a JSON with a "jokes" key containing an array of jokes.
-struct SearchResponse: Decodable {
-    let jokes: [Joke]
 }

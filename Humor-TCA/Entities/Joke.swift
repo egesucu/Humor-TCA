@@ -8,6 +8,6 @@
 import Foundation
 
 struct Joke: Identifiable, Codable {
-    let id: String
+    let id: Int
     let joke: String
 }

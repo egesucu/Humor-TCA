@@ -18,12 +18,20 @@
 			remoteGlobalIDString = 726AEDCA2D96EB4900368005;
 			remoteInfo = "Humor-TCA";
 		};
+		72759C6E2D974E64007E4973 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 726AEDC32D96EB4900368005 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 726AEDCA2D96EB4900368005;
+			remoteInfo = "Humor-TCA";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		726AEDCB2D96EB4900368005 /* Humor-TCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Humor-TCA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		726AEDDB2D96EB4B00368005 /* Humor-TCATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Humor-TCATests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72759C3E2D97275E007E4973 /* api_key.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = api_key.txt; sourceTree = "<group>"; };
+		72759C682D974E64007E4973 /* Humor-TCAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Humor-TCAUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -35,6 +43,11 @@
 		726AEDDE2D96EB4B00368005 /* Humor-TCATests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Humor-TCATests";
+			sourceTree = "<group>";
+		};
+		72759C692D974E64007E4973 /* Humor-TCAUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Humor-TCAUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -54,6 +67,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		72759C652D974E64007E4973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +82,7 @@
 			children = (
 				726AEDCD2D96EB4900368005 /* Humor-TCA */,
 				726AEDDE2D96EB4B00368005 /* Humor-TCATests */,
+				72759C692D974E64007E4973 /* Humor-TCAUITests */,
 				726AEDCC2D96EB4900368005 /* Products */,
 				72759C3E2D97275E007E4973 /* api_key.txt */,
 			);
@@ -72,6 +93,7 @@
 			children = (
 				726AEDCB2D96EB4900368005 /* Humor-TCA.app */,
 				726AEDDB2D96EB4B00368005 /* Humor-TCATests.xctest */,
+				72759C682D974E64007E4973 /* Humor-TCAUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,6 +146,29 @@
 			productReference = 726AEDDB2D96EB4B00368005 /* Humor-TCATests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		72759C672D974E64007E4973 /* Humor-TCAUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72759C702D974E64007E4973 /* Build configuration list for PBXNativeTarget "Humor-TCAUITests" */;
+			buildPhases = (
+				72759C642D974E64007E4973 /* Sources */,
+				72759C652D974E64007E4973 /* Frameworks */,
+				72759C662D974E64007E4973 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				72759C6F2D974E64007E4973 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				72759C692D974E64007E4973 /* Humor-TCAUITests */,
+			);
+			name = "Humor-TCAUITests";
+			packageProductDependencies = (
+			);
+			productName = "Humor-TCAUITests";
+			productReference = 72759C682D974E64007E4973 /* Humor-TCAUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -138,6 +183,10 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					726AEDDA2D96EB4B00368005 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 726AEDCA2D96EB4900368005;
+					};
+					72759C672D974E64007E4973 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 726AEDCA2D96EB4900368005;
 					};
@@ -159,6 +208,7 @@
 			targets = (
 				726AEDCA2D96EB4900368005 /* Humor-TCA */,
 				726AEDDA2D96EB4B00368005 /* Humor-TCATests */,
+				72759C672D974E64007E4973 /* Humor-TCAUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -173,6 +223,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		726AEDD92D96EB4B00368005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72759C662D974E64007E4973 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -196,6 +253,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		72759C642D974E64007E4973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -203,6 +267,11 @@
 			isa = PBXTargetDependency;
 			target = 726AEDCA2D96EB4900368005 /* Humor-TCA */;
 			targetProxy = 726AEDDC2D96EB4B00368005 /* PBXContainerItemProxy */;
+		};
+		72759C6F2D974E64007E4973 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 726AEDCA2D96EB4900368005 /* Humor-TCA */;
+			targetProxy = 72759C6E2D974E64007E4973 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -424,6 +493,40 @@
 			};
 			name = Release;
 		};
+		72759C712D974E64007E4973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "tr.com.egesucu.Humor-TCAUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Humor-TCA";
+			};
+			name = Debug;
+		};
+		72759C722D974E64007E4973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "tr.com.egesucu.Humor-TCAUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Humor-TCA";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -450,6 +553,15 @@
 			buildConfigurations = (
 				726AEDF32D96EB4B00368005 /* Debug */,
 				726AEDF42D96EB4B00368005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72759C702D974E64007E4973 /* Build configuration list for PBXNativeTarget "Humor-TCAUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72759C712D974E64007E4973 /* Debug */,
+				72759C722D974E64007E4973 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

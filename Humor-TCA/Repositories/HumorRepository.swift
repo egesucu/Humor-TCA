@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HumorRepository {
+protocol HumorRepository: Sendable {
     
     func searchJokes(keywords: String, number: Int) async throws -> [Joke]
     

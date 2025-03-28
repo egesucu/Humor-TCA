@@ -14,7 +14,7 @@ struct MemeTests {
     func decodingValidMemeJSON_shouldSucceed() throws {
         let json = """
         {
-            "id": "meme001",
+            "id": 1,
             "url": "https://example.com/meme.jpg",
             "type": "meme"
         }
@@ -22,7 +22,7 @@ struct MemeTests {
 
         let decoded = try JSONDecoder().decode(Meme.self, from: json)
 
-        #expect(decoded.id == "meme001")
+        #expect(decoded.id == 1)
         #expect(decoded.type == "meme")
         #expect(decoded.urlString == "https://example.com/meme.jpg")
         #expect(decoded.url?.absoluteString == "https://example.com/meme.jpg")
@@ -44,7 +44,7 @@ struct MemeTests {
 
     @Test
     func memeURLParsing_shouldReturnNilForInvalidURL() throws {
-        let meme = Meme(id: "123", urlString: "not a url", type: "meme")
+        let meme = Meme(id: 123, urlString: "not a url", type: "meme")
         #expect(meme.url == nil)
     }
 }

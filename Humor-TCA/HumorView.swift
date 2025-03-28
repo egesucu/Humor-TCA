@@ -58,6 +58,37 @@ struct HumorView: View {
         }
     }
     
+    var searchJokeView: some View {
+        Group {
+            TextField("Enter search query...", text: $viewModel.searchQuery)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            Button("Search") {
+                Task {
+                    await viewModel.searchJokes()
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .padding()
+            
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+            } else if let error = viewModel.errorMessage {
+                Text("Error: \(error)")
+                    .foregroundColor(.red)
+            } else {
+                ForEach(viewModel.jokes) { joke in
+                    VStack(alignment: .center) {
+                        Text(joke.joke)
+                            .jokeStyle()
+                            .padding()
+                    }
+                }
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -66,36 +97,11 @@ struct HumorView: View {
                     
                     memeOfDay
                     
-                    TextField("Enter search query...", text: $viewModel.searchQuery)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                    
-                    Button("Search") {
-                        Task {
-                            await viewModel.searchJokes()
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                    
-                    if viewModel.isLoading {
-                        ProgressView("Loading...")
-                    } else if let error = viewModel.errorMessage {
-                        Text("Error: \(error)")
-                            .foregroundColor(.red)
-                    } else {
-                        ForEach(viewModel.jokes) { joke in
-                            VStack(alignment: .center) {
-                                Text(joke.joke)
-                                    .jokeStyle()
-                                    .padding()
-                            }
-                        }
-                    }
+                    searchJokeView
                 }
                 .padding()
             }
-            .navigationTitle("Humor API Demo")
+            .navigationTitle("Humors")
         }
         .task(viewModel.loadRandomData)
     }

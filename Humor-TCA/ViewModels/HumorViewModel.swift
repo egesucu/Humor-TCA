@@ -38,6 +38,7 @@ class HumorViewModel {
             jokes = try await jokesResult
         } catch {
             print(error.localizedDescription)
+            errorMessage = error.localizedDescription
         }
     }
     
@@ -52,12 +53,10 @@ class HumorViewModel {
             meme = try await memeResult
             isLoading = false
         } catch {
-            errorMessage = error.localizedDescription
             isLoading = false
+            errorMessage = error.localizedDescription
         }
     }
 }
 
-extension Collection {
-    var isNotEmpty: Bool { !isEmpty }
-}
+
