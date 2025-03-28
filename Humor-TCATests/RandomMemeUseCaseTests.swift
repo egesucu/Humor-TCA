@@ -24,6 +24,7 @@ struct RandomMemeUseCaseTests {
         }
     }
 
+    @MainActor
     @Test
     func returnsMemeFromRepository() async throws {
         let expected = Meme(id: 42, urlString: "https://example.com/meme.jpg", type: "meme")
@@ -38,6 +39,7 @@ struct RandomMemeUseCaseTests {
         #expect(result.url?.absoluteString == expected.url?.absoluteString)
     }
 
+    @MainActor
     @Test
     func throwsIfRepositoryFails() async {
         struct FailingRepo: HumorRepository {

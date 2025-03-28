@@ -19,6 +19,7 @@ struct Meme: Identifiable, Decodable {
         case type
     }
     
+    @MainActor
     var url: URL? {
         guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return nil}
         return url

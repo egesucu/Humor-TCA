@@ -9,13 +9,13 @@ import Foundation
 
 struct SearchJokeUseCase {
     
-    private let repository: HumorRepository
+    private let repository: any HumorRepository
     
     struct Constants {
         static let defaultNumberOfJokes: Int = 10
     }
     
-    init(repository: HumorRepository) {
+    init(repository: any HumorRepository) {
         self.repository = repository
     }
     

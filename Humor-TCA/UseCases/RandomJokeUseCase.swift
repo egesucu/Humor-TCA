@@ -8,9 +8,9 @@
 import Foundation
 
 struct RandomJokeUseCase {
-    private let repository: HumorRepository
+    private let repository: any HumorRepository
     
-    init(repository: HumorRepository) {
+    init(repository: any HumorRepository) {
         self.repository = repository
     }
     

@@ -10,6 +10,7 @@ import Foundation
 @testable import Humor_TCA
 
 struct MemeTests {
+    @MainActor
     @Test
     func decodingValidMemeJSON_shouldSucceed() throws {
         let json = """
@@ -28,6 +29,7 @@ struct MemeTests {
         #expect(decoded.url?.absoluteString == "https://example.com/meme.jpg")
     }
 
+    @MainActor
     @Test
     func decodingInvalidMemeJSON_shouldThrow() {
         let json = """
@@ -42,6 +44,7 @@ struct MemeTests {
         }
     }
 
+    @MainActor
     @Test
     func memeURLParsing_shouldReturnNilForInvalidURL() throws {
         let meme = Meme(id: 123, urlString: "not a url", type: "meme")
